@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-const Button = ({ haClick, text }) => {
+const Button = ({ buClick, text }) => {
   return (
-    <button onClick={haClick}>
+    <button onClick={buClick}>
       {text}
     </button>
   )
@@ -19,19 +19,49 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
 
-  const haramClick = () => {
+  const haraClick = () => {
     const randomNumber = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomNumber)
   }
-  
+
+  const havoClick = () => {
+    const vote = [...votes]
+    vote[selected] += 1
+    setVotes(vote)
+  }
+
+  const mostVotes = () => {
+    let max = 0
+    let indexMax = 0
+    votes.forEach((item, index) => {
+      if (item > max) {
+        max = item
+        indexMax = index
+      }
+    })
+    return indexMax
+  }
 
   return (
     <>
       <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
-      <Button haClick={haramClick} text="next anecdote" />
-      
+      <p>has {votes[selected]} votes</p>
+      <Button buClick={havoClick} text="vote" />
+      <Button buClick={haraClick} text="next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      {votes[mostVotes()] === 0 ?
+        <>
+          <p>There is votes</p>
+        </>
+        :
+        <>
+          <p>{anecdotes[mostVotes()]}</p>
+          <p>has {votes[mostVotes()]} votes</p>
+        </>
+      }
     </>
   )
 }
