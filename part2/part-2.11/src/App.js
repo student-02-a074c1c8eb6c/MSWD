@@ -41,7 +41,7 @@ const Details=(event)=>{
   setNewNumber('')
 }
 }
-const heChange=(event)=>{
+const hmChange=(event)=>{
 
   setNewName(event.target.value)
 }
@@ -68,7 +68,7 @@ const display=persons.filter((filtered)=>{
     <div>
       <h2>Phonebook</h2>
       <Filter onChange={heFilterChange}/>
-      <PersonForm onSubmit={Details} valueName={newName} onChangeName={heChange} valueNumber={newNumber} onChangeNumber={heChangeNumber}/>
+      <PersonForm onSubmit={Details} valueName={newName} onChangeName={hmChange} valueNumber={newNumber} onChangeNumber={heChangeNumber}/>
       <h2>Numbers</h2>
        {display.map(person=>
         <PersonDetails key={person.id} person={person} />
